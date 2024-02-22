@@ -67,7 +67,7 @@ function playGame() {
     {
         let computerChoice = getComputerChoice();
         let playerChoice = getPlayerChoice();
-        console.log(playRound(computerChoice, playerChoice));
+        alert(playRound(computerChoice, playerChoice));
     }
     if (score > scoreComputer)
     {
