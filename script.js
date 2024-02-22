@@ -26,7 +26,7 @@ function getComputerChoice() {
 function getPlayerChoice() {
     let player_choice;
 
-    player_choice = prompt("1. Rock \n 2. Paper \n 3. Scissors \n Enter your choice!");
+    player_choice = prompt(" 1. Rock \n 2. Paper \n 3. Scissors \n Enter your choice!");
  
     return player_choice.toUpperCase();
 }
