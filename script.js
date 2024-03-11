@@ -1,8 +1,11 @@
 let playerChoice = '';
 let score = 0, scoreComputer = 0;
+let resultAlert = '';
 const rckbtn = document.querySelector('#rock');
 const papbtn = document.querySelector('#paper');
 const scsbtn = document.querySelector('#scissors');
+const container = document.querySelector('#container');
+const text_content = document.createElement('div');
 
 
 
@@ -57,17 +60,21 @@ let computerChoice = getComputerChoice();
 
 rckbtn.addEventListener('click', () => {
     playerChoice = 'ROCK';
-    console.log(playRound(computerChoice, playerChoice));
+    resultAlert = playRound(computerChoice, playerChoice);
+    text_content.textContent = resultAlert;
 })
 
 papbtn.addEventListener('click', () => {
     playerChoice = 'PAPER';
-    console.log(playRound(computerChoice, playerChoice));
+    resultAlert = playRound(computerChoice, playerChoice);
+    text_content.textContent = resultAlert;
 })
 
 scsbtn.addEventListener('click', () => {
     playerChoice = 'SCISSORS';
-    console.log(playRound(computerChoice, playerChoice));
+    resultAlert = playRound(computerChoice, playerChoice);
+    text_content.textContent = resultAlert;
+    container.appendChild(text_content);
 })
 
 if (score > scoreComputer) {
