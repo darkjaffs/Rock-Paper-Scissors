@@ -2,12 +2,15 @@ let playerChoice = '';
 let score = 0, scoreComputer = 0;
 let resultAlert = '';
 let win_alert = '';
+let roundno = 0, flag = 0;
 const rckbtn = document.querySelector('#rock');
 const papbtn = document.querySelector('#paper');
 const scsbtn = document.querySelector('#scissors');
 const container = document.querySelector('#container');
 const text_content = document.createElement('div');
 const score_card = document.createElement('div');
+const winText = document.createElement('div');
+const btncontainer = document.querySelector('#buttoncontainer');
 
 
 
@@ -33,6 +36,9 @@ function playRound(computerSelection, playerSelection) {
 
     let gameCondition;
     
+
+    roundno++;
+    
     if (computerSelection === playerSelection) {
         return gameCondition = "Oh no! You Tied!";
     }
@@ -54,6 +60,29 @@ function playRound(computerSelection, playerSelection) {
     }
 }
 
+function winCheck() {
+
+    if (score > scoreComputer && roundno >= 5)
+    {
+        winText.textContent = `Congratulations you win with a score of ${score}`;
+        roundno = 0;
+        flag = 1;
+        score = 0;
+        btncontainer.appendChild(winText);
+    }
+    else if (roundno >= 5 && score < scoreComputer)
+    {
+        winText.textContent = `You have lost with a score of ${score} while computer scored ${scoreComputer}`;
+        roundno = 0;
+        flag = 1;
+        score = 0;
+        btncontainer.appendChild(winText);
+    }
+    else if (roundno === 1 && flag === 1)
+    {
+        btncontainer.removeChild(winText);
+    }
+}
 
 startGame = "Lets play a game of Rock, Paper and Scissors!";
 text_content.textContent = startGame;
@@ -64,30 +93,44 @@ rckbtn.addEventListener('click', () => {
     playerChoice = 'ROCK';
     let computerChoice = getComputerChoice();
     resultAlert = playRound(computerChoice, playerChoice);
+
     score_card.textContent = `Current Score = ${score}`;
     container.appendChild(score_card);
+
     text_content.textContent = resultAlert;
     container.appendChild(text_content);
+
+    winCheck();
 })
 
 papbtn.addEventListener('click', () => {
     playerChoice = 'PAPER';
+
     let computerChoice = getComputerChoice();
     resultAlert = playRound(computerChoice, playerChoice);
+
     score_card.textContent = `Current Score = ${score}`;
     container.appendChild(score_card);
+
     text_content.textContent = resultAlert;
     container.appendChild(text_content);
+
+    winCheck();
 })
 
 scsbtn.addEventListener('click', () => {
     playerChoice = 'SCISSORS';
+
     let computerChoice = getComputerChoice();
     resultAlert = playRound(computerChoice, playerChoice);
+
     score_card.textContent = `Current Score = ${score}`;
     container.appendChild(score_card);
+
     text_content.textContent = resultAlert;
     container.appendChild(text_content);
+
+    winCheck();
 })
 
 
