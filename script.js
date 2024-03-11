@@ -1,11 +1,13 @@
 let playerChoice = '';
 let score = 0, scoreComputer = 0;
 let resultAlert = '';
+let win_alert = '';
 const rckbtn = document.querySelector('#rock');
 const papbtn = document.querySelector('#paper');
 const scsbtn = document.querySelector('#scissors');
 const container = document.querySelector('#container');
 const text_content = document.createElement('div');
+const score_card = document.createElement('div');
 
 
 
@@ -15,24 +17,22 @@ function getComputerChoice() {
     num_gen = Math.floor(Math.random() * 3) + 1;
 
     if (num_gen === 1) {
-        computer_choice = "rock";
+        computer_choice = "ROCK";
     }
     else if (num_gen === 2) {
-        computer_choice = "paper";
+        computer_choice = "PAPER";
     }
     else if (num_gen === 3) {
-        computer_choice = "scissors";
+        computer_choice = "SCISSORS";
     }
-    else {
-        getComputerChoice(); //This is to make sure there are no error, this will rerun the function until a proper value is generated.
-    }
-    return computer_choice.toUpperCase();  //We are going to uppercase so we could compare no matter the case
+
+    return computer_choice;  //We are going to uppercase so we could compare no matter the case
 }
 
 function playRound(computerSelection, playerSelection) {
 
     let gameCondition;
-
+    
     if (computerSelection === playerSelection) {
         return gameCondition = "Oh no! You Tied!";
     }
@@ -55,36 +55,39 @@ function playRound(computerSelection, playerSelection) {
 }
 
 
+startGame = "Lets play a game of Rock, Paper and Scissors!";
+text_content.textContent = startGame;
+container.appendChild(text_content);
 
-let computerChoice = getComputerChoice();
 
 rckbtn.addEventListener('click', () => {
     playerChoice = 'ROCK';
+    let computerChoice = getComputerChoice();
     resultAlert = playRound(computerChoice, playerChoice);
-    text_content.textContent = resultAlert;
-})
-
-papbtn.addEventListener('click', () => {
-    playerChoice = 'PAPER';
-    resultAlert = playRound(computerChoice, playerChoice);
-    text_content.textContent = resultAlert;
-})
-
-scsbtn.addEventListener('click', () => {
-    playerChoice = 'SCISSORS';
-    resultAlert = playRound(computerChoice, playerChoice);
+    score_card.textContent = `Current Score = ${score}`;
+    container.appendChild(score_card);
     text_content.textContent = resultAlert;
     container.appendChild(text_content);
 })
 
-if (score > scoreComputer) {
-    alert(`Congratulations, You have won with a score of ${score} out of 5`);
-}
-else {
-    alert(`You have lost the game with score of ${score}`);
-}
+papbtn.addEventListener('click', () => {
+    playerChoice = 'PAPER';
+    let computerChoice = getComputerChoice();
+    resultAlert = playRound(computerChoice, playerChoice);
+    score_card.textContent = `Current Score = ${score}`;
+    container.appendChild(score_card);
+    text_content.textContent = resultAlert;
+    container.appendChild(text_content);
+})
+
+scsbtn.addEventListener('click', () => {
+    playerChoice = 'SCISSORS';
+    let computerChoice = getComputerChoice();
+    resultAlert = playRound(computerChoice, playerChoice);
+    score_card.textContent = `Current Score = ${score}`;
+    container.appendChild(score_card);
+    text_content.textContent = resultAlert;
+    container.appendChild(text_content);
+})
 
 
-
-
-console.log("Lets play a game of Rock, Paper and Scissors!");
